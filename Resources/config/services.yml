@@ -1,0 +1,36 @@
+services:
+    domtom_logger.log_stack:
+        class: DomTomProject\LoggerBundle\Stack\LogStack
+        arguments: ['@domtom_logger.writer_provider']
+        
+    domtom_logger.log_stack_provider:
+        class: DomTomProject\LoggerBundle\Stack\LogStackProvider
+        arguments: ['@service_container']
+        
+    domtom_logger.writer_mysql:
+        class: DomTomProject\LoggerBundle\Writer\MySQLWriter
+        arguments: ['@doctrine.orm.entity_manager']
+        
+    domtom_logger.writer_mongo:
+        class: DomTomProject\LoggerBundle\Writer\MySQLWriter
+        arguments: ['@doctrine_mongodb.odm.document_manager']        
+        
+    domtom_logger.writer_plain:
+        class: DomTomProject\LoggerBundle\Writer\PlainWriter
+        arguments: ['%domtom_logger.plain_directory%']
+        
+    domtom_logger.writer_provider:
+        class: DomTomProject\LoggerBundle\Writer\WriterProvider
+        arguments: ['@service_container']
+   
+    domtom_logger.write_log_listener:
+        class: DomTomProject\LoggerBundle\Listener\WriteLogListener
+        arguments: ['@domtom_logger.log_stack_provider']
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate }
+            
+    domtom_logger.write_failed_log_listener:
+        class: DomTomProject\LoggerBundle\Listener\WriteFailedLogListener
+        arguments: ['@domtom_logger.log_stack_provider']
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }        

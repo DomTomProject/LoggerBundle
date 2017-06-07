@@ -1,0 +1,36 @@
+{
+    "name": "domtomproject/logger-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "keywords": ["logging", "debugging"],
+    "description": "Symfony bundle for logging actions",
+    "authors": [
+        {
+            "name": "Damian Zschille",
+            "email": "crunkowiec@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "DomTomProject\\LoggerBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DomTomProject\\LoggerBundle\\Tests\\": "Tests/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "symfony/symfony": "3.2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2",
+        "symfony/phpunit-bridge": "^3.0"
+    },
+    "suggest": {
+        "doctrine/mongodb-odm": "NoSQL is better for logging",
+        "doctrine/mongodb-odm-bundle": "This bundle already have Writer for mongoDB doctrin bundle"
+    }
+}
