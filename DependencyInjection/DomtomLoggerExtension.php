@@ -17,6 +17,7 @@ class DomtomLoggerExtension extends Extension {
         $container->setParameter('domtom_logger.writer', $config['writer']);
         $container->setParameter('domtom_logger.log_stack', $config['log_stack']);
         $container->setParameter('domtom_logger.plain_directory', $config['plain_directory']);
+        $container->setParameter('domtom_logger.enabled', $config['enabled']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config')
         );

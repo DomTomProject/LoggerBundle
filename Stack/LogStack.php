@@ -9,27 +9,28 @@ class LogStack implements LogStackInterface {
 
     private $writer;
     private $stack;
+    private $isEnabled;
 
-    public function __construct(WriterProviderInterface $writerProvider) {
+    public function __construct(WriterProviderInterface $writerProvider, bool $isEnabled) {
         $this->writer = $writerProvider->provide();
         $this->stack = [];
+        $this->isEnabled = $isEnabled;
     }
 
     public function add(LogInterface $log) {
-        $this->stack[$log->getCreatedMicrotime()] = clone $log;
+        if (!$this->isEnabled) {
+            return;
+        }
+
+        $this->stack[spl_object_hash($log)] = $log;
     }
 
     public function remove(LogInterface $log) {
-        unset($this->stack[$log->getCreatedMicrotime()]);
-    }
-
-    public function update(LogInterface $log) {
-        $id = $log->getCreatedMicrotime();
-        if (isset($this->stack[$id])) {
-            $this->stack[$id] = clone $log;
+        if (!$this->isEnabled) {
             return;
         }
-        $this->stack[] = clone $log;
+
+        unset($this->stack[spl_object_hash($log)]);
     }
 
     public function save() {
@@ -43,7 +44,7 @@ class LogStack implements LogStackInterface {
         if (empty($this->stack)) {
             return;
         }
-        
+
         foreach ($this->stack as &$log) {
             $log->setFailure(true);
         }

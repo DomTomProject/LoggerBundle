@@ -35,16 +35,16 @@ class Log implements LogInterface {
      * @ORM\Column(name="is_failure", type="boolean")
      */
     protected $failure;
-    private $microtime;
+    private $unique;
 
     public function __construct() {
         $this->createdAt = new DateTime();
         $this->priority = self::PRIORITY_LOW;
         $this->failure = false;
-        $this->microtime = microtime(true);
+        $this->unique = uniqid();
     }
 
-    public function getCeatedAt(): ?DateTime {
+    public function getCreatedAt(): ?DateTime {
         return $this->createdAt;
     }
 
@@ -74,8 +74,8 @@ class Log implements LogInterface {
         $this->failure = $failure;
     }
 
-    public function getCreatedMicrotime(): float {
-        return $this->microtime;
+    public function getUnique(): string {
+        return $this->unique;
     }
 
 }

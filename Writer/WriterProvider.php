@@ -3,6 +3,7 @@
 namespace DomTomProject\LoggerBundle\Writer;
 
 use DomTomProject\LoggerBundle\ServiceBag;
+use Symfony\Component\DependencyInjection\Container;
 
 class WriterProvider implements WriterProviderInterface {
 

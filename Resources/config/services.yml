@@ -1,7 +1,7 @@
 services:
     domtom_logger.log_stack:
         class: DomTomProject\LoggerBundle\Stack\LogStack
-        arguments: ['@domtom_logger.writer_provider']
+        arguments: ['@domtom_logger.writer_provider', '%domtom_logger.enabled%']
         
     domtom_logger.log_stack_provider:
         class: DomTomProject\LoggerBundle\Stack\LogStackProvider
@@ -12,7 +12,7 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         
     domtom_logger.writer_mongo:
-        class: DomTomProject\LoggerBundle\Writer\MySQLWriter
+        class: DomTomProject\LoggerBundle\Writer\MongoDBWriter
         arguments: ['@doctrine_mongodb.odm.document_manager']        
         
     domtom_logger.writer_plain:

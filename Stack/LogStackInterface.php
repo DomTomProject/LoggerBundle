@@ -10,8 +10,6 @@ interface LogStackInterface {
 
     public function remove(LogInterface $log);
 
-    public function update(LogInterface $log);
-
     public function save();
 
     public function failed();

@@ -15,6 +15,7 @@ class Configuration implements ConfigurationInterface {
 
         $rootNode
                 ->children()
+                ->scalarNode('enabled')->defaultValue(true)->cannotBeEmpty()->end()
                 ->scalarNode('writer')->defaultValue(ServiceBag::WRITER_MYSQL)->cannotBeEmpty()->end()
                 ->scalarNode('log_stack')->defaultValue(ServiceBag::LOG_STACK)->cannotBeEmpty()->end()
                 ->scalarNode('plain_directory')->defaultValue('%kernel.root_dir%/Resources/logs')->end()

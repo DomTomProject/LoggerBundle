@@ -31,16 +31,14 @@ class Log implements LogInterface {
      * @MongoDB\Field(name="is_failure", type="boolean")
      */
     protected $failure;
-    private $microtime;
 
     public function __construct() {
         $this->createdAt = new DateTime();
         $this->priority = self::PRIORITY_LOW;
         $this->failure = false;
-        $this->microtime = microtime(true);
     }
 
-    public function getCeatedAt(): ?DateTime {
+    public function getCreatedAt(): ?DateTime {
         return $this->createdAt;
     }
 
@@ -68,10 +66,6 @@ class Log implements LogInterface {
 
     public function setFailure(bool $failure) {
         $this->failure = $failure;
-    }
-
-    public function getCreatedMicrotime(): float {
-        return $this->microtime;
     }
 
 }

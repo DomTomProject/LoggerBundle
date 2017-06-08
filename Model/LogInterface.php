@@ -14,11 +14,9 @@ interface LogInterface {
 
     public function setCreatedAt(DateTime $createdAt);
 
-    public function getCeatedAt(): ?DateTime;
+    public function getCreatedAt(): ?DateTime;
 
     public function isFailure(): ?bool;
 
     public function setFailure(bool $failure);
-    
-    public function getCreatedMicrotime(): float;
 }
