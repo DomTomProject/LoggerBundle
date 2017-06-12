@@ -35,13 +35,11 @@ class Log implements LogInterface {
      * @ORM\Column(name="is_failure", type="boolean")
      */
     protected $failure;
-    private $unique;
 
     public function __construct() {
         $this->createdAt = new DateTime();
         $this->priority = self::PRIORITY_LOW;
         $this->failure = false;
-        $this->unique = uniqid();
     }
 
     public function getCreatedAt(): ?DateTime {
@@ -74,8 +72,5 @@ class Log implements LogInterface {
         $this->failure = $failure;
     }
 
-    public function getUnique(): string {
-        return $this->unique;
-    }
 
 }

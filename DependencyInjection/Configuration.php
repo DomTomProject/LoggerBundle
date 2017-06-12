@@ -15,11 +15,24 @@ class Configuration implements ConfigurationInterface {
 
         $rootNode
                 ->children()
-                ->scalarNode('enabled')->defaultValue(true)->cannotBeEmpty()->end()
-                ->scalarNode('writer')->defaultValue(ServiceBag::WRITER_MYSQL)->cannotBeEmpty()->end()
-                ->scalarNode('log_stack')->defaultValue(ServiceBag::LOG_STACK)->cannotBeEmpty()->end()
-                ->scalarNode('plain_directory')->defaultValue('%kernel.root_dir%/Resources/logs')->end()
-                ->end()
+                    ->scalarNode('enabled')->defaultValue(true)->cannotBeEmpty()->end()
+                    ->scalarNode('writer')->defaultValue(ServiceBag::WRITER_MYSQL)->cannotBeEmpty()->end()
+                    ->scalarNode('log_stack')->defaultValue(ServiceBag::LOG_STACK)->cannotBeEmpty()->end()
+                    ->arrayNode('mysql')->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('manager')->defaultValue('default')->cannotBeEmpty()->end()
+                            ->end() 
+                    ->end()
+                    ->arrayNode('mongo')->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('manager')->defaultValue('default')->cannotBeEmpty()->end()
+                        ->end() 
+                    ->end()
+                    ->arrayNode('plain')->addDefaultsIfNotSet()
+                       ->children()
+                            ->scalarNode('directory')->defaultValue('%kernel.root_dir%/Resources/logs')->end()
+                        ->end() 
+                    ->end()
                 ->end();
 
         return $treeBuilder;

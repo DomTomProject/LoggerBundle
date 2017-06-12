@@ -6,6 +6,9 @@ use DomTomProject\LoggerBundle\Model\LogInterface;
 use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
+/**
+ * @MongoDB\Document
+ */
 class Log implements LogInterface {
 
     public const PRIORITY_LOW = 0;
@@ -18,7 +21,7 @@ class Log implements LogInterface {
     protected $id;
 
     /**
-     * @MongoDB\Field(name="created_at", type="datetime")
+     * @MongoDB\Field(name="created_at", type="date")
      */
     protected $createdAt;
 

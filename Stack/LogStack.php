@@ -17,7 +17,7 @@ class LogStack implements LogStackInterface {
         $this->isEnabled = $isEnabled;
     }
 
-    public function add(LogInterface $log) {
+    public function add(LogInterface $log): void {
         if (!$this->isEnabled) {
             return;
         }
@@ -25,7 +25,7 @@ class LogStack implements LogStackInterface {
         $this->stack[spl_object_hash($log)] = $log;
     }
 
-    public function remove(LogInterface $log) {
+    public function remove(LogInterface $log): void {
         if (!$this->isEnabled) {
             return;
         }
@@ -33,14 +33,14 @@ class LogStack implements LogStackInterface {
         unset($this->stack[spl_object_hash($log)]);
     }
 
-    public function save() {
-        if (empty($this->stack)) {
+    public function save(): void {
+        if (empty($this->stack) || !$this->isEnabled) {
             return;
         }
         $this->writer->save($this->stack);
     }
 
-    public function failed() {
+    public function failed(): void {
         if (empty($this->stack)) {
             return;
         }
@@ -48,7 +48,18 @@ class LogStack implements LogStackInterface {
         foreach ($this->stack as &$log) {
             $log->setFailure(true);
         }
-        $this->writer->save($this->stack);
+    }
+
+    public function getStack(): array {
+        return $this->stack;
+    }
+
+    public function clear(): void {
+        $this->stack = [];
+    }
+
+    public function setEnabled(bool $enabled): void {
+        $this->isEnabled = $enabled;
     }
 
 }

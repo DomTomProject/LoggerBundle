@@ -7,9 +7,13 @@ services:
         class: DomTomProject\LoggerBundle\Stack\LogStackProvider
         arguments: ['@service_container']
         
+    domtom_logger.entity_manager_provider:
+        class: DomTomProject\LoggerBundle\EntityManagerProvider
+        arguments: ['@service_container']
+        
     domtom_logger.writer_mysql:
         class: DomTomProject\LoggerBundle\Writer\MySQLWriter
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@domtom_logger.entity_manager_provider']
         
     domtom_logger.writer_mongo:
         class: DomTomProject\LoggerBundle\Writer\MongoDBWriter
@@ -17,7 +21,7 @@ services:
         
     domtom_logger.writer_plain:
         class: DomTomProject\LoggerBundle\Writer\PlainWriter
-        arguments: ['%domtom_logger.plain_directory%']
+        arguments: ['%domtom_logger.plain.directory%']
         
     domtom_logger.writer_provider:
         class: DomTomProject\LoggerBundle\Writer\WriterProvider

@@ -15,6 +15,7 @@ class WriteFailedLogListener {
      
     public function onKernelException(GetResponseForExceptionEvent $event){
         $this->logStack->failed();
+        $this->logStack->save();
     }
     
 }

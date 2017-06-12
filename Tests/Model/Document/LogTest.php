@@ -2,17 +2,17 @@
 
 namespace DomTomProject\LoggerBundle\Tests\Model\Document;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as TestCase;
 use DomTomProject\LoggerBundle\Model\Document\Log;
 use DateTime;
 
 class LogTest extends TestCase {
 
-    public function testGetCeatedAt() {
+    public function testGetCreatedAt() {
         $log = new Log();
 
-        $this->assertNotEmpty($log->getCeatedAt());
-        $this->assertInstanceOf(DateTime::class, $log->getCeatedAt());
+        $this->assertNotEmpty($log->getCreatedAt());
+        $this->assertInstanceOf(DateTime::class, $log->getCreatedAt());
     }
 
     public function testGetId() {
@@ -37,11 +37,5 @@ class LogTest extends TestCase {
         $this->assertTrue($log->isFailure());
     }
 
-    public function testGetCreatedMicrotime() {
-        $log = new Log();
-        
-        $this->assertNotEmpty($log->getCreatedMicrotime());
-        $this->assertInternalType('float', $log->getCreatedMicrotime());
-    }
 
 }
