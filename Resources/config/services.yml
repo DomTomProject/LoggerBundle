@@ -17,7 +17,7 @@ services:
         
     domtom_logger.writer_mongo:
         class: DomTomProject\LoggerBundle\Writer\MongoDBWriter
-        arguments: ['@doctrine_mongodb.odm.document_manager']        
+        arguments: ['@?doctrine_mongodb.odm.document_manager']        
         
     domtom_logger.writer_plain:
         class: DomTomProject\LoggerBundle\Writer\PlainWriter
