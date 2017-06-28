@@ -23,7 +23,7 @@
     },
     "require": {
         "php": "^7.1",
-        "symfony/symfony": "3.2.*"
+        "symfony/symfony": "~3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2",
