@@ -28,7 +28,7 @@ doctrine:
                 driver:   pdo_mysql
                 host:     '%database_host%'
                 port:     '%database_port%'
-                dbname:   'profotel_log'
+                dbname:   'database'
                 user:     '%database_user%'
                 password: '%database_password%'
                 charset:  UTF8
@@ -52,11 +52,12 @@ So now manager for logs is 'log'. Thats provide you to use other database for lo
 #### a) Create new Log Entity.
 ```
 use Doctrine\ORM\Mapping as ORM;
+use DomTomProject\LoggerBundle\Model\Log;
 
 /**
  * @ORM\Entity
  */
-class CustomLog extends ClientLog {
+class CustomLog extends Log {
 
     /**
      * @Column(type="text", nullable=true)
